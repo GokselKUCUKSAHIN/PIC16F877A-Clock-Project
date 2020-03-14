@@ -1,0 +1,39 @@
+#include <main.h>
+
+int val = 0;
+int val2 = 0;
+
+int onluk = 0;
+int birlik = 0;
+#INT_TIMER1
+void TIMER_isr(void)
+{
+   val++;
+   if(val == 77) //100
+   {
+      val = 0;
+      val2++;
+   }
+   if(val2 > 99)
+   {
+      val2 = 0;
+   }
+   
+   birlik = val2 % 10;
+   onluk = (val2 - birlik) / 10;
+   output_b((onluk << 4) + birlik);
+}
+void main()
+{
+   setup_timer_1(T1_INTERNAL | T1_DIV_BY_1);
+   set_timer1(77);
+   clear_interrupt(INT_TIMER1);
+   enable_interrupts(INT_TIMER1);
+   enable_interrupts(GLOBAL);
+
+   while(TRUE)
+   {
+      //TODO: User Code
+   }
+
+}

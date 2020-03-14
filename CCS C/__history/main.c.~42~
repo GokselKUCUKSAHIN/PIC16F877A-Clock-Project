@@ -1,0 +1,90 @@
+#include <main.h>
+int tick = 0;
+int milis = 0;
+int second = 0;
+int minute = 0;
+
+//I WILL REFACTOR THIS LATER YOU KNOW!!!
+
+// SECOND
+int8 secOnes = 0;
+int8 secTens = 0;
+
+// MINUTE
+int8 minOnes = 0;
+int8 minTens = 0;
+
+// HOUR
+int8 hrOnes = 0;
+int8 hrTens = 0;
+
+// Control Variables
+int8 isA = 0;
+int8 isB = 0;
+int8 isC = 0;
+int8 isD = 0;
+
+#INT_TIMER1
+void TIMER_isr(void)
+{
+   tick++;
+   if(tick >= 6)
+   {
+      tick = 0;
+      isD = 1;
+      milis++;
+      if(milis >= 10)
+      {
+         milis = 0;
+         isC = 1;
+         second++;
+         if(second >= 60)
+         {
+            second = 0;
+            isB = 1;
+            minute++;
+            if(minute >= 60)
+            {
+               minute = 0;
+            }
+         }
+      }
+   }
+   if(isB == 1)
+   {
+      isB = 0;
+      minOnes = minute % 10;
+      minTens = (minute - minOnes) / 10;
+      output_b((minTens << 4) + minOnes);
+   }
+   if(isC == 1)
+   {
+      isC = 0;
+      secOnes = second % 10;
+      secTens = (second - secOnes) / 10;
+      output_c((secTens << 4) + secOnes);
+   }
+   if(isD == 1)
+   {
+      isD = 0;
+      output_d(milis);
+   }
+}
+void main()
+{
+   setup_timer_1(T1_INTERNAL | T1_DIV_BY_1);
+   set_timer1(77);
+   clear_interrupt(INT_TIMER1);
+   enable_interrupts(INT_TIMER1);
+   enable_interrupts(GLOBAL);
+   //
+   output_a(0);
+   output_b(0);
+   output_c(0);
+   output_d(9);
+   output_e(2);
+   while(TRUE)
+   {
+      //TODO: User Code
+   }
+}

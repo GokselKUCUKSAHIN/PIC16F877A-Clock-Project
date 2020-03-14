@@ -1,0 +1,58 @@
+#include <main.h>
+int tick = 0;
+int milis = 0;
+int second = 0;
+
+//I WILL REFACTOR THIS LATER YOU KNOW!!!
+int sub = 0;
+int onluk = 0;
+int birlik = 0;
+
+int8 isB = 0;
+
+#INT_TIMER1
+void TIMER_isr(void)
+{
+   tick++;
+   if(tick == 6)
+   {
+      tick = 0;
+      milis++;
+      if(milis == 10)
+      {
+         milis = 0;
+         second++;
+         if(second == 60)
+         {
+            second = 0;
+         }
+         isB = 1;
+      }
+   }
+   if(second == 60)
+   {
+      second = 0;
+      isB = 1;
+   }
+   if(isB == 1)
+   {
+      isB = 0;
+      birlik = second % 10;
+      onluk = (second - birlik) / 10;
+      output_b((onluk << 4) + birlik);
+   }
+}
+void main()
+{
+   setup_timer_1(T1_INTERNAL | T1_DIV_BY_1);
+   set_timer1(77);
+   clear_interrupt(INT_TIMER1);
+   enable_interrupts(INT_TIMER1);
+   enable_interrupts(GLOBAL);
+
+   while(TRUE)
+   {
+      //TODO: User Code
+   }
+
+}

@@ -1,0 +1,154 @@
+#include <main.h>
+int8 tick = 0;
+int8 milis = 0;
+int8 second = 45;
+int8 minute = 59;
+int8 hour = 23;
+
+//I WILL REFACTOR THIS LATER YOU KNOW!!!
+
+// SECOND
+int8 secOnes = 0;
+int8 secTens = 0;
+
+// MINUTE
+int8 minOnes = 0;
+int8 minTens = 0;
+
+// HOUR
+int8 hrOnes = 0;
+int8 hrTens = 0;
+
+// Control Variables
+int1 isA = 1;
+int1 isB = 1;
+int1 isC = 1;
+int1 isD = 1;
+int1 isE = 1;
+
+// SETTINGS
+int1 d4 = 0;
+int1 d5 = 0;
+int1 d6 = 0;
+int1 d7 = 0;
+
+#INT_TIMER1
+void TIMER_isr(void)
+{
+   tick++;
+   if(tick >= 6)
+   {
+      tick = 0;
+      isD = 1;
+      milis++;
+      if(milis >= 10)
+      {
+         milis = 0;
+         isC = 1;
+         second++;
+         if(second >= 60)
+         {
+            second = 0;
+            isB = 1;
+            minute++;
+            if(minute >= 60)
+            {
+               minute = 0;
+               isA = 1;
+               hour++;
+               if(hour >= 24)
+               {
+                  hour = 0;
+                  isE = 1;
+               }
+            }
+         }
+      }
+   }
+   if(isA == 1 || isE == 1)
+   {
+      isA = 0;
+      isE = 0;
+      hrOnes = hour % 10;
+      hrTens = (hour - hrOnes) / 10;
+      output_a(hrOnes);
+      output_e(hrTens);
+   }
+   if(isB == 1)
+   {
+      isB = 0;
+      minOnes = minute % 10;
+      minTens = (minute - minOnes) / 10;
+      output_b((minTens << 4) + minOnes);
+   }
+   if(isC == 1)
+   {
+      isC = 0;
+      secOnes = second % 10;
+      secTens = (second - secOnes) / 10;
+      output_c((secTens << 4) + secOnes);
+   }
+   if(isD == 1)
+   {
+      isD = 0;
+      
+      output_bit(pin_D3, (milis >> 3) & 0x00000001);
+      output_bit(pin_D2, (milis >> 2) & 0x00000001);
+      output_bit(pin_D1, (milis >> 1) & 0x00000001);
+      output_bit(pin_D0, milis & 0x00000001);
+      //output_d(milis);
+   }
+}
+void main()
+{
+   setup_timer_1(T1_INTERNAL | T1_DIV_BY_1);
+   set_timer1(77);
+   clear_interrupt(INT_TIMER1);
+   enable_interrupts(INT_TIMER1);
+   enable_interrupts(GLOBAL);
+   set_tris_d(255);
+   
+   while(TRUE)
+   {
+      // GET ALL SETTINGS
+      d4 = input(pin_D4);
+      d5 = input(pin_D5);
+      d6 = input(pin_D6);
+      d7 = input(pin_D7);
+      //
+      if(d5)
+      {
+         // RESET SECOND
+         second = 0;
+         isC = 1;
+         delay_ms(200);
+         while(input(pin_D5));
+      }
+      if(d6)
+      {
+         // INCREAE MINUTE
+         minute++;
+         if(minute >= 60)
+         {
+            minute = 0;
+         }
+         isB = 1;
+         delay_ms(200);
+         while(input(pin_D6));
+      }
+      if(d7)
+      {
+         // INCREAE HOUR
+         hour++;
+         if(hour >= 24)
+         {
+            hour = 0;
+         }
+         isE = 1;
+         isA = 1;
+         delay_ms(200);
+         while(input(pin_D7));
+      }
+      delay_ms(100);
+   }
+}
