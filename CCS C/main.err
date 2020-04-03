@@ -1,3 +1,4 @@
-      Memory usage:   ROM=5%      RAM=7% - 9%
-      0 Errors,  0 Warnings.
+>>> Warning 216 "main.c" Line 275(1,2): Interrupts disabled during call to prevent re-entrancy:  (renderClock)
+      Memory usage:   ROM=6%      RAM=8% - 10%
+      0 Errors,  1 Warnings.
 Build Successful.

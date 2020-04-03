@@ -245,7 +245,7 @@ void main()
                   }
                   else
                   {
-                     second--;
+                     minute--;
                   }
                   isC = 1;
                   break;
@@ -253,6 +253,7 @@ void main()
                case 3:
                {
                   // MILISECOND
+
                   if(milis == 0)
                   {
                      milis = 9;

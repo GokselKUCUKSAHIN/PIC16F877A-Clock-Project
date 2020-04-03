@@ -1,9 +1,9 @@
 #include <main.h>
 int8 tick = 0;
 int8 milis = 0;
-int8 second = 0;
-int8 minute = 0;
-int8 hour = 0;
+int8 second = 45;
+int8 minute = 59;
+int8 hour = 23;
 
 
 // SECOND
@@ -142,7 +142,7 @@ void main()
             selection++;
             if(selection > 3)
             {
-               selection = 0;
+            selection = 0;
             }
             delay_ms(200);
             while(input(pin_D6));
@@ -173,6 +173,8 @@ void main()
                      minute = 0;
                   }
                   isB = 1;
+                  delay_ms(200);
+                  while(input(pin_D6));
                   break;
                }
                case 2:
@@ -184,6 +186,7 @@ void main()
                      second = 0;
                   }
                   isC = 1;
+                  delay_ms(200);
                   break;
                }
                case 3:
@@ -195,12 +198,11 @@ void main()
                      milis = 0;
                   }
                   isD = 1;
+                  delay_ms(200);
                   break;
                }
             }
             renderClock();
-            delay_ms(200);
-            while(input(pin_D5));
          }
          if(d4)
          {
@@ -210,13 +212,10 @@ void main()
                case 0:
                {
                   // HOUR
-                  if(hour == 0)
+                  hour--;
+                  if(hour <= -1)
                   {
-                     hour = 23;
-                  }
-                  else
-                  {
-                     hour--;
+                     hour = 59;
                   }
                   isE = 1;
                   isA = 1;
@@ -225,51 +224,44 @@ void main()
                case 1:
                {
                   // MINUTE
-                  if(minute == 0)
+                  minute--;
+                  if(minute <= -1)
                   {
                      minute = 59;
                   }
-                  else
-                  {
-                     minute--;
-                  }
                   isB = 1;
+                  delay_ms(200);
+                  while(input(pin_D6));
                   break;
                }
                case 2:
                {
                   // SECOND
-                  if(second == 0)
+                  second--;
+                  if(second <= -1)
                   {
                      second = 59;
                   }
-                  else
-                  {
-                     second--;
-                  }
                   isC = 1;
+                  delay_ms(200);
                   break;
                }
                case 3:
                {
                   // MILISECOND
-                  if(milis == 0)
+                  milis--;
+                  if(milis <= -1)
                   {
                      milis = 9;
                   }
-                  else
-                  {
-                     milis--;
-                  }
                   isD = 1;
+                  delay_ms(200);
                   break;
                }
             }
             renderClock();
-            delay_ms(200);
-            while(input(pin_D4));
          }
       }
-      delay_ms(50);
+      delay_ms(100);
    }
 }

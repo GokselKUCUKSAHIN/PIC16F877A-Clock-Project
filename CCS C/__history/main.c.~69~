@@ -210,13 +210,10 @@ void main()
                case 0:
                {
                   // HOUR
+                  hour--;
                   if(hour == 0)
                   {
-                     hour = 23;
-                  }
-                  else
-                  {
-                     hour--;
+                     hour = 24;
                   }
                   isE = 1;
                   isA = 1;
@@ -225,13 +222,10 @@ void main()
                case 1:
                {
                   // MINUTE
+                  minute--;
                   if(minute == 0)
                   {
-                     minute = 59;
-                  }
-                  else
-                  {
-                     minute--;
+                     minute = 60;
                   }
                   isB = 1;
                   break;
@@ -239,13 +233,10 @@ void main()
                case 2:
                {
                   // SECOND
+                  second--;
                   if(second == 0)
                   {
-                     second = 59;
-                  }
-                  else
-                  {
-                     second--;
+                     second = 60;
                   }
                   isC = 1;
                   break;
@@ -253,13 +244,10 @@ void main()
                case 3:
                {
                   // MILISECOND
+                  milis--;
                   if(milis == 0)
                   {
-                     milis = 9;
-                  }
-                  else
-                  {
-                     milis--;
+                     milis = 10;
                   }
                   isD = 1;
                   break;
