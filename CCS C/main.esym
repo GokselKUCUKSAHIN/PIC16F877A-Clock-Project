@@ -1,7 +1,7 @@
-D G "__PCM__" 0 0 ""5.007""
-D G "__DEVICE__" 0 0 ""
-D G "__DATE__" 0 0 ""03-Nis-20""
-D G "__TIME__" 0 0 ""18:32:09"" "Standard Header file for the PIC16F877A device ////////////////"
+D G "__PCM__" 0 524 ""5.007""
+D G "__DEVICE__" 0 524 "877"
+D G "__DATE__" 0 524 ""10-May-20""
+D G "__TIME__" 0 524 ""17:04:00"" "Standard Header file for the PIC16F877A device ////////////////"
 c L "set_tris_a" 2 5 13 "FUNCTION"
 v L "value" 2 28 "int8" `54 
 f B "set_tris_a" 2 28 "void(int8 value)" `53 
@@ -775,50 +775,88 @@ d G "INT_EEPROM" 2 656 "0x008D10"
 d G "INT_TIMER0" 2 657 "0x000B20"
 d G "INT_COMP" 2 658 "0x008D40"
 V G "tick" 0 2 "int8" `619 
-V G "milis" 0 3 "int8" `620 
-V G "second" 0 4 "int8" `621 
-V G "minute" 0 5 "int8" `622 
-V G "hour" 0 6 "int8" `623 
-C L "jump_to_irs" 0 9 1 "FUNCTION"
-V G "secOnes" 0 10 "int8" `624 
-V G "secTens" 0 11 "int8" `625 
-C L "jump_to_irs" 0 9 1 "FUNCTION"
-V G "minOnes" 0 14 "int8" `626 
-V G "minTens" 0 15 "int8" `627 
-C L "jump_to_irs" 0 9 1 "FUNCTION"
-V G "hrOnes" 0 18 "int8" `628 
-V G "hrTens" 0 19 "int8" `629 
-C L "jump_to_irs" 0 9 1 "FUNCTION"
-V G "isA" 0 22 "int1" `630 
-V G "isB" 0 23 "int1" `631 
-V G "isC" 0 24 "int1" `632 
-V G "isD" 0 25 "int1" `633 
-V G "isE" 0 26 "int1" `634 
-C L "jump_to_irs" 0 9 1 "FUNCTION"
-V G "d4" 0 29 "int1" `635 
-V G "d5" 0 30 "int1" `636 
-V G "d6" 0 31 "int1" `637 
-V G "d7" 0 32 "int1" `638 
-V G "selection" 0 33 "int8" `639 
-V G "isPaused" 0 35 "int1" `640 
-F G "renderClock" 0 38 "void()" `641 
-F G "TIMER_isr" 0 74 "void()" `646 
-F G "MAIN" 0 111 "void()" `647 
-C L "MAIN" 0 9 1 "FUNCTION"
-C L "MAIN" 0 9 1 "FUNCTION"
-C L "MAIN" 0 9 1 "FUNCTION"
-C L "MAIN" 0 9 1 "FUNCTION"
-C L "MAIN" 0 9 1 "FUNCTION"
-C L "MAIN" 0 9 1 "FUNCTION"
-C L "MAIN" 0 9 1 "FUNCTION"
-C L "MAIN" 0 9 1 "FUNCTION"
-C L "MAIN" 0 9 1 "FUNCTION"
-C L "MAIN" 0 9 1 "FUNCTION"
-C L "MAIN" 0 9 1 "FUNCTION"
-C L "MAIN" 0 9 1 "FUNCTION"
-C L "MAIN" 0 9 1 "FUNCTION"
-C L "MAIN" 0 9 1 "FUNCTION"
-C L "MAIN" 0 9 1 "FUNCTION"
+C L "jump_to_irs" 0 4 1 "FUNCTION"
+V G "milis" 0 5 "int8" `620 
+V G "second" 0 6 "int8" `621 
+V G "minute" 0 7 "int8" `622 
+V G "hour" 0 8 "int8" `623 
+C L "jump_to_irs" 0 4 1 "FUNCTION"
+V G "alarmMin" 0 11 "int8" `624 
+V G "alarmHour" 0 12 "int8" `625 
+C L "jump_to_irs" 0 4 2 "FUNCTION"
+V G "secOnes" 0 19 "int8" `626 
+V G "secTens" 0 20 "int8" `627 
+C L "jump_to_irs" 0 4 1 "FUNCTION"
+V G "minOnes" 0 23 "int8" `628 
+V G "minTens" 0 24 "int8" `629 
+C L "jump_to_irs" 0 4 1 "FUNCTION"
+V G "hrOnes" 0 27 "int8" `630 
+V G "hrTens" 0 28 "int8" `631 
+C L "jump_to_irs" 0 4 1 "FUNCTION"
+V G "isHourChanged" 0 31 "int1" `632 
+V G "isMinChanged" 0 32 "int1" `633 
+V G "isSecChanged" 0 33 "int1" `634 
+V G "isMilChanged" 0 34 "int1" `635 
+C L "jump_to_irs" 0 4 1 "FUNCTION"
+V G "d4" 0 37 "int1" `636 
+C L "jump_to_irs" 0 4 1 "FUNCTION"
+V G "d5" 0 38 "int1" `637 
+C L "jump_to_irs" 0 4 1 "FUNCTION"
+V G "d6" 0 39 "int1" `638 
+C L "jump_to_irs" 0 4 1 "FUNCTION"
+V G "d7" 0 40 "int1" `639 
+C L "jump_to_irs" 0 4 1 "FUNCTION"
+V G "selection" 0 42 "int8" `640 
+V G "mode" 0 45 "int8" `641 
+V L "state" 0 48 "int8" `643 
+F G "setActive" 0 49 "void(int8 state)" `642 
+V L "id" 0 53 "int8" `646 
+V L "value" 0 53 "int8" `647 
+F G "printDisplay" 0 54 "void(int8 id,int8 value)" `645  "id = 0 Hour Tens"
+C L "printDisplay" 0 4 10 "FUNCTION"
+C L "printDisplay" 0 4 1 "FUNCTION"
+C L "printDisplay" 0 4 1 "FUNCTION"
+C L "printDisplay" 0 4 1 "FUNCTION"
+C L "printDisplay" 0 4 1 "FUNCTION"
+C L "printDisplay" 0 4 1 "FUNCTION"
+C L "printDisplay" 0 4 1 "FUNCTION"
+C L "printDisplay" 0 4 1 "FUNCTION"
+C L "printDisplay" 0 4 1 "FUNCTION"
+V L "value" 0 157 "int8" `649 
+F G "printHourDigits" 0 158 "void(int8 value)" `648  "Saat değerini birler ve onlar basamağına"
+C L "printHourDigits" 0 4 1 "FUNCTION"
+V L "value" 0 170 "int8" `654 
+F G "printMinuteDigits" 0 171 "void(int8 value)" `653 
+V L "value" 0 181 "int8" `656 
+F G "printSecondDigits" 0 182 "void(int8 value)" `655 
+F G "printClock" 0 193 "void()" `657 
+F G "printAlarm" 0 216 "void()" `658 
+F G "checkAlarm" 0 223 "void()" `659 
+F G "TIMER_isr" 0 236 "void()" `660 
+F G "MAIN" 0 274 "void()" `661  "SETTINGS"
+C L "MAIN" 0 4 1 "FUNCTION"
+C L "MAIN" 0 4 1 "FUNCTION"
+C L "MAIN" 0 4 1 "FUNCTION"
+C L "MAIN" 0 4 1 "FUNCTION"
+C L "MAIN" 0 4 1 "FUNCTION"
+C L "MAIN" 0 4 1 "FUNCTION"
+C L "MAIN" 0 4 1 "FUNCTION"
+C L "MAIN" 0 4 1 "FUNCTION"
+C L "MAIN" 0 4 1 "FUNCTION"
+C L "MAIN" 0 4 1 "FUNCTION"
+C L "MAIN" 0 4 1 "FUNCTION"
+C L "MAIN" 0 4 1 "FUNCTION"
+C L "MAIN" 0 4 1 "FUNCTION"
+C L "MAIN" 0 4 1 "FUNCTION"
+C L "MAIN" 0 4 1 "FUNCTION"
+C L "MAIN" 0 4 1 "FUNCTION"
+C L "MAIN" 0 4 1 "FUNCTION"
+C L "MAIN" 0 4 1 "FUNCTION"
+C L "MAIN" 0 4 1 "FUNCTION"
+C L "MAIN" 0 4 1 "FUNCTION"
+C L "MAIN" 0 4 1 "FUNCTION"
+C L "MAIN" 0 4 1 "FUNCTION"
+C L "MAIN" 0 4 1 "FUNCTION"
 F B "reset_cpu" 0 0
 F B "abs" 1 0
 F B "sleep" 0 0

@@ -20,32 +20,44 @@
 02A     second
 02B     minute
 02C     hour
-02D     secOnes
-02E     secTens
-02F     minOnes
-030     minTens
-031     hrOnes
-032     hrTens
-033.0   isA
-033.1   isB
-033.2   isC
-033.3   isD
-033.4   isE
-033.5   d4
-033.6   d5
-033.7   d6
-034.0   d7
-034.1   isPaused
-035     selection
-036     @TRIS_C
-037     @delay_ms1.P1
-037     MAIN.@SCRATCH1
-03C     renderClock.@SCRATCH1
-03C     TIMER_isr.@SCRATCH1
-03D     renderClock.@SCRATCH2
-03E     @DIV88.P1
-03F     @DIV88.P1
-040     @DIV88.@SCRATCH1
+02D     alarmMin
+02E     alarmHour
+02F     secOnes
+030     secTens
+031     minOnes
+032     minTens
+033     hrOnes
+034     hrTens
+035.0   isHourChanged
+035.1   isMinChanged
+035.2   isSecChanged
+035.3   isMilChanged
+035.4   d4
+035.5   d5
+035.6   d6
+035.7   d7
+036     selection
+037     mode
+038     @TRIS_C
+039     @delay_ms1.P1
+039     setActive.state
+039     checkAlarm.@SCRATCH1
+03F     printSecondDigits.value
+03F     printMinuteDigits.value
+03F     printHourDigits.value
+03F     printClock.@SCRATCH1
+040     printDisplay.id
+040     printHourDigits.@SCRATCH1
+040     printMinuteDigits.@SCRATCH1
+040     printSecondDigits.@SCRATCH1
+041     printDisplay.value
+041     printHourDigits.@SCRATCH2
+041     printMinuteDigits.@SCRATCH2
+041     printSecondDigits.@SCRATCH2
+042     @DIV88.P1
+042     printDisplay.@SCRATCH1
+043     @DIV88.P1
+044     @DIV88.@SCRATCH1
 077     @SCRATCH
 078     @SCRATCH
 078     _RETURN_
@@ -55,8 +67,8 @@
 09C.6   C1OUT
 09C.7   C2OUT
 0FF     @INTERRUPT_AREA
-10D-10E @WRITE_PROGRAM_MEMORY8.P1
-10D-10E @READ_PROGRAM_MEMORY8.P2
+10D-10E @READ_PROGRAM_MEMORY8.P1
+10D-10E @WRITE_PROGRAM_MEMORY8.P2
 17F     @INTERRUPT_AREA
 1FF     @INTERRUPT_AREA
 27F     @INTERRUPT_AREA
@@ -89,25 +101,30 @@ F7F     @INTERRUPT_AREA
 FFF     @INTERRUPT_AREA
 
 ROM Allocation:
-000031  @DIV88
-000046  renderClock
-0000DE  TIMER_isr
-000108  @delay_ms1
-00011C  MAIN
-00011C  @cinit1
-00013B  @cinit2
-0001F7  @goto10709
-0001FF  @goto10761
+000031  printDisplay
+000199  @DIV88
+0001AE  printSecondDigits
+0001CD  printMinuteDigits
+0001EC  printHourDigits
+00020A  printClock
+000225  TIMER_isr
+00024E  setActive
+00025A  printAlarm
+000275  @delay_ms1
+000289  checkAlarm
+00029A  @cinit1
+00029A  MAIN
+0002BF  @cinit2
 
 Project Directory:
-    C:\ERU\Bahar\Embedded Systems\document\CCS C Projects\test8\
+    C:\ERU\Bahar\Embedded Systems\ProjectClock\CCS C\
 
 Project Files:
-    main.c                                                  [03-Nis-20 18:32  CRC=44286640]
-    main.h                                                  [13-Mar-20 17:52  CRC=CF12E969]
-    ..\..\..\..\..\..\Program Files (x86)\PICC\Devices\16F877A.h [21-Haz-13 16:04  CRC=4E65664C]
+    main.c                                                  [10-May-20 17:03  CRC=6A1F5694]
+    ..\..\document\CCS C Projects\test8\main.h              [13-Mar-20 17:52  CRC=CF12E969]
+    ..\..\..\..\..\Program Files (x86)\PICC\Devices\16F877A.h [21-Haz-13 16:04  CRC=4E65664C]
 
-Source signature=B0061C41
+Source signature=D5FD0C95
 
 Units:
     main (main)

@@ -1,4 +1,8 @@
->>> Warning 216 "main.c" Line 275(1,2): Interrupts disabled during call to prevent re-entrancy:  (renderClock)
-      Memory usage:   ROM=6%      RAM=8% - 10%
-      0 Errors,  1 Warnings.
+>>> Warning 216 "main.c" Line 523(1,2): Interrupts disabled during call to prevent re-entrancy:  (printHourDigits)
+>>> Warning 216 "main.c" Line 523(1,2): Interrupts disabled during call to prevent re-entrancy:  (printMinuteDigits)
+>>> Warning 216 "main.c" Line 523(1,2): Interrupts disabled during call to prevent re-entrancy:  (printSecondDigits)
+>>> Warning 216 "main.c" Line 523(1,2): Interrupts disabled during call to prevent re-entrancy:  (printClock)
+>>> Warning 216 "main.c" Line 523(1,2): Interrupts disabled during call to prevent re-entrancy:  (printDisplay)
+      Memory usage:   ROM=12%      RAM=8% - 11%
+      0 Errors,  5 Warnings.
 Build Successful.

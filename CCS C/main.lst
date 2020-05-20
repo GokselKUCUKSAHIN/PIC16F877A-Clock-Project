@@ -1,18 +1,18 @@
-CCS PCM C Compiler, Version 5.007, 61971               03-Nis-20 18:32
+CCS PCM C Compiler, Version 5.007, 61971               10-May-20 17:04
 
-               Filename:   C:\ERU\Bahar\Embedded Systems\document\CCS C Projects\test8\main.lst
+               Filename:   C:\ERU\Bahar\Embedded Systems\ProjectClock\CCS C\main.lst
 
-               ROM used:   519 words (6%)
+               ROM used:   999 words (12%)
                            Largest free fragment is 2048
-               RAM used:   29 (8%) at main() level
-                           38 (10%) worst case
+               RAM used:   30 (8%) at main() level
+                           42 (11%) worst case
                Stack used: 1 locations (0 in main + 1 for interrupts)
                Stack size: 8
 
 *
-0000:  MOVLW  01
+0000:  MOVLW  02
 0001:  MOVWF  0A
-0002:  GOTO   11C
+0002:  GOTO   29A
 0003:  NOP
 0004:  MOVWF  7F
 0005:  SWAPF  03,W
@@ -58,49 +58,33 @@ CCS PCM C Compiler, Version 5.007, 61971               03-Nis-20 18:32
 002D:  RETFIE
 002E:  BCF    0A.3
 002F:  BCF    0A.4
-0030:  GOTO   0DE
+0030:  GOTO   225
 .................... #include <main.h> 
 .................... #include <16F877A.h> 
 .................... //////// Standard Header file for the PIC16F877A device //////////////// 
 .................... #device PIC16F877A 
-0031:  MOVF   3F,W
-0032:  CLRF   78
-0033:  SUBWF  3E,W
-0034:  BTFSC  03.0
-0035:  GOTO   039
-0036:  MOVF   3E,W
-0037:  MOVWF  77
-0038:  GOTO   045
-0039:  CLRF   77
-003A:  MOVLW  08
-003B:  MOVWF  40
-003C:  RLF    3E,F
-003D:  RLF    77,F
-003E:  MOVF   3F,W
-003F:  SUBWF  77,W
-0040:  BTFSC  03.0
-0041:  MOVWF  77
-0042:  RLF    78,F
-0043:  DECFSZ 40,F
-0044:  GOTO   03C
-0045:  RETURN
 *
-01F7:  BSF    0A.0
-01F8:  BCF    0A.1
-01F9:  BCF    0A.2
-01FA:  ADDWF  02,F
-01FB:  GOTO   18B
-01FC:  GOTO   193
-01FD:  GOTO   19A
-01FE:  GOTO   1A1
-01FF:  BCF    0A.0
-0200:  BSF    0A.1
-0201:  BCF    0A.2
-0202:  ADDWF  02,F
-0203:  GOTO   1BE
-0204:  GOTO   1C8
-0205:  GOTO   1D1
-0206:  GOTO   1DA
+0199:  MOVF   43,W
+019A:  CLRF   78
+019B:  SUBWF  42,W
+019C:  BTFSC  03.0
+019D:  GOTO   1A1
+019E:  MOVF   42,W
+019F:  MOVWF  77
+01A0:  GOTO   1AD
+01A1:  CLRF   77
+01A2:  MOVLW  08
+01A3:  MOVWF  44
+01A4:  RLF    42,F
+01A5:  RLF    77,F
+01A6:  MOVF   43,W
+01A7:  SUBWF  77,W
+01A8:  BTFSC  03.0
+01A9:  MOVWF  77
+01AA:  RLF    78,F
+01AB:  DECFSZ 44,F
+01AC:  GOTO   1A4
+01AD:  RETURN
 ....................  
 .................... #list 
 ....................  
@@ -112,34 +96,43 @@ CCS PCM C Compiler, Version 5.007, 61971               03-Nis-20 18:32
 ....................  
 .................... #use delay(crystal=20000000) 
 *
-0108:  MOVLW  37
-0109:  MOVWF  04
-010A:  BCF    03.7
-010B:  MOVF   00,W
-010C:  BTFSC  03.2
-010D:  GOTO   11B
-010E:  MOVLW  06
-010F:  MOVWF  78
-0110:  CLRF   77
-0111:  DECFSZ 77,F
-0112:  GOTO   111
-0113:  DECFSZ 78,F
-0114:  GOTO   110
-0115:  MOVLW  7B
-0116:  MOVWF  77
-0117:  DECFSZ 77,F
-0118:  GOTO   117
-0119:  DECFSZ 00,F
-011A:  GOTO   10E
-011B:  RETURN
+0275:  MOVLW  39
+0276:  MOVWF  04
+0277:  BCF    03.7
+0278:  MOVF   00,W
+0279:  BTFSC  03.2
+027A:  GOTO   288
+027B:  MOVLW  06
+027C:  MOVWF  78
+027D:  CLRF   77
+027E:  DECFSZ 77,F
+027F:  GOTO   27E
+0280:  DECFSZ 78,F
+0281:  GOTO   27D
+0282:  MOVLW  7B
+0283:  MOVWF  77
+0284:  DECFSZ 77,F
+0285:  GOTO   284
+0286:  DECFSZ 00,F
+0287:  GOTO   27B
+0288:  RETURN
 ....................  
 ....................  
 .................... int8 tick = 0; 
-.................... int8 milis = 0; 
-.................... int8 second = 0; 
-.................... int8 minute = 0; 
-.................... int8 hour = 0; 
 ....................  
+.................... // CURRENT TIME 
+.................... int8 milis = 0; 
+.................... int8 second = 30; 
+.................... int8 minute = 2; 
+.................... int8 hour = 17; 
+....................  
+.................... // ALARM 
+.................... int8 alarmMin = 3; 
+.................... int8 alarmHour = 17; 
+....................  
+.................... // 
+.................... // VARIABLES 
+.................... // 
 ....................  
 .................... // SECOND 
 .................... int8 secOnes = 0; 
@@ -154,675 +147,1418 @@ CCS PCM C Compiler, Version 5.007, 61971               03-Nis-20 18:32
 .................... int8 hrTens = 0; 
 ....................  
 .................... // Control Variables 
-.................... int1 isA = 1; 
-.................... int1 isB = 1; 
-.................... int1 isC = 1; 
-.................... int1 isD = 1; 
-.................... int1 isE = 1; 
+.................... int1 isHourChanged = 1; 
+.................... int1 isMinChanged = 1; 
+.................... int1 isSecChanged = 1; 
+.................... int1 isMilChanged = 1; 
 ....................  
 .................... // SETTINGS 
-.................... int1 d4 = 0; 
-.................... int1 d5 = 0; 
-.................... int1 d6 = 0; 
-.................... int1 d7 = 0; 
-.................... int8 selection = 0; 
+.................... int1 d4 = 0; // button 4 
+.................... int1 d5 = 0; // button 3 
+.................... int1 d6 = 0; // button 2 
+.................... int1 d7 = 0; // button 1 
 .................... // 
-.................... int1 isPaused = 0; 
+.................... int8 selection = 0; 
 ....................  
-.................... void renderClock() 
+.................... // 
+.................... int8 mode = 0; 
+....................  
+....................  
+.................... void setActive(int1 state) 
 .................... { 
-....................    if(isA == 1 || isE == 1) 
+....................    output_bit(pin_C7, state); 
 *
-0046:  BTFSC  33.0
-0047:  GOTO   04A
-0048:  BTFSS  33.4
-0049:  GOTO   068
-....................     { 
-....................         isA = 0; 
-004A:  BCF    33.0
-....................         isE = 0; 
-004B:  BCF    33.4
-....................         hrOnes = hour % 10; 
-004C:  MOVF   2C,W
-004D:  MOVWF  3E
-004E:  MOVLW  0A
-004F:  MOVWF  3F
-0050:  CALL   031
-0051:  MOVF   77,W
-0052:  MOVWF  31
-....................         hrTens = (hour - hrOnes) / 10; 
-0053:  MOVF   31,W
-0054:  SUBWF  2C,W
-0055:  MOVWF  3D
-0056:  MOVWF  3E
-0057:  MOVLW  0A
-0058:  MOVWF  3F
-0059:  CALL   031
-005A:  MOVF   78,W
-005B:  MOVWF  32
-....................         output_a(hrOnes); 
-005C:  BSF    03.5
-005D:  CLRF   05
-005E:  BCF    03.5
-005F:  MOVF   31,W
-0060:  MOVWF  05
-....................         output_e(hrTens); 
-0061:  BSF    03.5
-0062:  BCF    09.0
-0063:  BCF    09.1
-0064:  BCF    09.2
-0065:  BCF    03.5
-0066:  MOVF   32,W
-0067:  MOVWF  09
-....................     } 
-....................     if(isB == 1) 
-0068:  BTFSS  33.1
-0069:  GOTO   087
-....................     { 
-....................        isB = 0; 
-006A:  BCF    33.1
-....................        minOnes = minute % 10; 
-006B:  MOVF   2B,W
-006C:  MOVWF  3E
-006D:  MOVLW  0A
-006E:  MOVWF  3F
-006F:  CALL   031
-0070:  MOVF   77,W
-0071:  MOVWF  2F
-....................        minTens = (minute - minOnes) / 10; 
-0072:  MOVF   2F,W
-0073:  SUBWF  2B,W
-0074:  MOVWF  3D
-0075:  MOVWF  3E
-0076:  MOVLW  0A
-0077:  MOVWF  3F
-0078:  CALL   031
-0079:  MOVF   78,W
-007A:  MOVWF  30
-....................        output_b((minTens << 4) + minOnes); 
-007B:  SWAPF  30,W
-007C:  MOVWF  77
-007D:  MOVLW  F0
-007E:  ANDWF  77,F
-007F:  MOVF   77,W
-0080:  ADDWF  2F,W
-0081:  MOVWF  3C
-0082:  BSF    03.5
-0083:  CLRF   06
-0084:  BCF    03.5
-0085:  MOVF   3C,W
-0086:  MOVWF  06
-....................     } 
-....................     if(isC == 1) 
-0087:  BTFSS  33.2
-0088:  GOTO   0A8
-....................     { 
-....................       isC = 0; 
-0089:  BCF    33.2
-....................       secOnes = second % 10; 
-008A:  MOVF   2A,W
-008B:  MOVWF  3E
-008C:  MOVLW  0A
-008D:  MOVWF  3F
-008E:  CALL   031
-008F:  MOVF   77,W
-0090:  MOVWF  2D
-....................       secTens = (second - secOnes) / 10; 
-0091:  MOVF   2D,W
-0092:  SUBWF  2A,W
-0093:  MOVWF  3D
-0094:  MOVWF  3E
-0095:  MOVLW  0A
-0096:  MOVWF  3F
-0097:  CALL   031
-0098:  MOVF   78,W
-0099:  MOVWF  2E
-....................       output_c((secTens << 4) + secOnes); 
-009A:  SWAPF  2E,W
-009B:  MOVWF  77
-009C:  MOVLW  F0
-009D:  ANDWF  77,F
-009E:  MOVF   77,W
-009F:  ADDWF  2D,W
-00A0:  MOVWF  3C
-00A1:  MOVLW  00
-00A2:  MOVWF  36
-00A3:  BSF    03.5
-00A4:  CLRF   07
-00A5:  BCF    03.5
-00A6:  MOVF   3C,W
-00A7:  MOVWF  07
-....................     } 
-....................     if(isD == 1) 
-00A8:  BTFSS  33.3
-00A9:  GOTO   0DD
-....................     { 
-....................       isD = 0; 
-00AA:  BCF    33.3
-....................       output_bit(pin_D3, (milis >> 3) & 0x00000001); 
-00AB:  RRF    29,W
-00AC:  MOVWF  77
-00AD:  RRF    77,F
-00AE:  RRF    77,F
-00AF:  MOVLW  1F
-00B0:  ANDWF  77,F
-00B1:  MOVF   77,W
-00B2:  ANDLW  01
-00B3:  BTFSS  03.2
-00B4:  GOTO   0B7
-00B5:  BCF    08.3
-00B6:  GOTO   0B8
-00B7:  BSF    08.3
-00B8:  BSF    03.5
-00B9:  BCF    08.3
-....................       output_bit(pin_D2, (milis >> 2) & 0x00000001); 
-00BA:  BCF    03.5
-00BB:  RRF    29,W
-00BC:  MOVWF  77
-00BD:  RRF    77,F
-00BE:  MOVLW  3F
-00BF:  ANDWF  77,F
-00C0:  MOVF   77,W
-00C1:  ANDLW  01
-00C2:  BTFSS  03.2
-00C3:  GOTO   0C6
-00C4:  BCF    08.2
-00C5:  GOTO   0C7
-00C6:  BSF    08.2
-00C7:  BSF    03.5
-00C8:  BCF    08.2
-....................       output_bit(pin_D1, (milis >> 1) & 0x00000001); 
-00C9:  BCF    03.0
-00CA:  BCF    03.5
-00CB:  RRF    29,W
-00CC:  ANDLW  01
-00CD:  BTFSS  03.2
-00CE:  GOTO   0D1
-00CF:  BCF    08.1
-00D0:  GOTO   0D2
-00D1:  BSF    08.1
-00D2:  BSF    03.5
-00D3:  BCF    08.1
-....................       output_bit(pin_D0, milis & 0x00000001); 
-00D4:  BCF    03.5
-00D5:  BTFSC  29.0
-00D6:  GOTO   0D9
-00D7:  BCF    08.0
-00D8:  GOTO   0DA
-00D9:  BSF    08.0
-00DA:  BSF    03.5
-00DB:  BCF    08.0
-00DC:  BCF    03.5
-....................     } 
-00DD:  RETURN
+024E:  MOVF   39,F
+024F:  BTFSS  03.2
+0250:  GOTO   253
+0251:  BCF    07.7
+0252:  GOTO   254
+0253:  BSF    07.7
+0254:  BCF    38.7
+0255:  MOVF   38,W
+0256:  BSF    03.5
+0257:  MOVWF  07
+0258:  BCF    03.5
+0259:  RETURN
 .................... } 
+....................  
+.................... void printDisplay(int8 id, int8 value) 
+.................... { 
+....................    // id = 0 Hour Tens 
+....................    // id = 1 Hour Ones 
+....................    // id = 2 Min Tens 
+....................    // id = 3 Min Ones 
+....................    // id = 4 Sec Tens 
+....................    // id = 5 Sec Ones 
+....................    // id = 6 Utility 
+....................     
+....................    // Tüm bir bloğu değiştirmek yerine bitwise olarak yazmayı tercih ettim 
+....................    // böylece bir block içerisinde kolaylıkla hem output hem de input işlemi 
+....................    // yapabiliyorum.Örn C için 0,1,2,3,4,5,6 output  C7 ise input 
+....................    // eğer output_c olarak tanımlasaydım. tüm 8 biti de output yapacaktı. 
+....................     
+....................    switch(id) 
+*
+0031:  MOVF   40,W
+0032:  XORLW  00
+0033:  BTFSC  03.2
+0034:  GOTO   048
+0035:  XORLW  01
+0036:  BTFSC  03.2
+0037:  GOTO   060
+0038:  XORLW  03
+0039:  BTFSC  03.2
+003A:  GOTO   097
+003B:  XORLW  01
+003C:  BTFSC  03.2
+003D:  GOTO   0BE
+003E:  XORLW  07
+003F:  BTFSC  03.2
+0040:  GOTO   0F5
+0041:  XORLW  01
+0042:  BTFSC  03.2
+0043:  GOTO   122
+0044:  XORLW  03
+0045:  BTFSC  03.2
+0046:  GOTO   161
+0047:  GOTO   198
+....................    { 
+....................       case 0: 
+....................       { 
+....................          // HOUR TENS 
+....................        if(value >= 0 && value <= 2) 
+0048:  MOVF   41,W
+0049:  SUBLW  02
+004A:  BTFSS  03.0
+004B:  GOTO   05F
+....................        { 
+....................          output_bit(pin_E1, (value >> 1) & 1); 
+004C:  BCF    03.0
+004D:  RRF    41,W
+004E:  ANDLW  01
+004F:  BTFSS  03.2
+0050:  GOTO   053
+0051:  BCF    09.1
+0052:  GOTO   054
+0053:  BSF    09.1
+0054:  BSF    03.5
+0055:  BCF    09.1
+....................          output_bit(pin_E0, (value & 1)); 
+0056:  BCF    03.5
+0057:  BTFSC  41.0
+0058:  GOTO   05B
+0059:  BCF    09.0
+005A:  GOTO   05C
+005B:  BSF    09.0
+005C:  BSF    03.5
+005D:  BCF    09.0
+005E:  BCF    03.5
+....................        } 
+....................          break; 
+005F:  GOTO   198
+....................       } 
+....................       case 1: 
+....................       { 
+....................          // HOUR ONES 
+....................        if(value >= 0 && value <= 9) 
+0060:  MOVF   41,W
+0061:  SUBLW  09
+0062:  BTFSS  03.0
+0063:  GOTO   096
+....................        { 
+....................          output_bit(pin_A3, (value >> 3) & 1); 
+0064:  RRF    41,W
+0065:  MOVWF  77
+0066:  RRF    77,F
+0067:  RRF    77,F
+0068:  MOVLW  1F
+0069:  ANDWF  77,F
+006A:  MOVF   77,W
+006B:  ANDLW  01
+006C:  BTFSS  03.2
+006D:  GOTO   070
+006E:  BCF    05.3
+006F:  GOTO   071
+0070:  BSF    05.3
+0071:  BSF    03.5
+0072:  BCF    05.3
+....................          output_bit(pin_A2, (value >> 2) & 1); 
+0073:  BCF    03.5
+0074:  RRF    41,W
+0075:  MOVWF  77
+0076:  RRF    77,F
+0077:  MOVLW  3F
+0078:  ANDWF  77,F
+0079:  MOVF   77,W
+007A:  ANDLW  01
+007B:  BTFSS  03.2
+007C:  GOTO   07F
+007D:  BCF    05.2
+007E:  GOTO   080
+007F:  BSF    05.2
+0080:  BSF    03.5
+0081:  BCF    05.2
+....................          output_bit(pin_A1, (value >> 1) & 1); 
+0082:  BCF    03.0
+0083:  BCF    03.5
+0084:  RRF    41,W
+0085:  ANDLW  01
+0086:  BTFSS  03.2
+0087:  GOTO   08A
+0088:  BCF    05.1
+0089:  GOTO   08B
+008A:  BSF    05.1
+008B:  BSF    03.5
+008C:  BCF    05.1
+....................          output_bit(pin_A0, (value & 1)); 
+008D:  BCF    03.5
+008E:  BTFSC  41.0
+008F:  GOTO   092
+0090:  BCF    05.0
+0091:  GOTO   093
+0092:  BSF    05.0
+0093:  BSF    03.5
+0094:  BCF    05.0
+0095:  BCF    03.5
+....................        }  
+....................          break; 
+0096:  GOTO   198
+....................       } 
+....................       case 2: 
+....................       { 
+....................          // MINUTE TENS 
+....................        if(value >= 0 && value <= 5) 
+0097:  MOVF   41,W
+0098:  SUBLW  05
+0099:  BTFSS  03.0
+009A:  GOTO   0BD
+....................        { 
+....................          output_bit(pin_B6, (value >> 2) & 1); 
+009B:  RRF    41,W
+009C:  MOVWF  77
+009D:  RRF    77,F
+009E:  MOVLW  3F
+009F:  ANDWF  77,F
+00A0:  MOVF   77,W
+00A1:  ANDLW  01
+00A2:  BTFSS  03.2
+00A3:  GOTO   0A6
+00A4:  BCF    06.6
+00A5:  GOTO   0A7
+00A6:  BSF    06.6
+00A7:  BSF    03.5
+00A8:  BCF    06.6
+....................          output_bit(pin_B5, (value >> 1) & 1); 
+00A9:  BCF    03.0
+00AA:  BCF    03.5
+00AB:  RRF    41,W
+00AC:  ANDLW  01
+00AD:  BTFSS  03.2
+00AE:  GOTO   0B1
+00AF:  BCF    06.5
+00B0:  GOTO   0B2
+00B1:  BSF    06.5
+00B2:  BSF    03.5
+00B3:  BCF    06.5
+....................          output_bit(pin_B4, (value & 1)); 
+00B4:  BCF    03.5
+00B5:  BTFSC  41.0
+00B6:  GOTO   0B9
+00B7:  BCF    06.4
+00B8:  GOTO   0BA
+00B9:  BSF    06.4
+00BA:  BSF    03.5
+00BB:  BCF    06.4
+00BC:  BCF    03.5
+....................        } 
+....................          break; 
+00BD:  GOTO   198
+....................       } 
+....................       case 3: 
+....................       { 
+....................         // MINUTE ONES 
+....................       if(value >= 0 && value <= 9) 
+00BE:  MOVF   41,W
+00BF:  SUBLW  09
+00C0:  BTFSS  03.0
+00C1:  GOTO   0F4
+....................       { 
+....................          output_bit(pin_B3, (value >> 3) & 1); 
+00C2:  RRF    41,W
+00C3:  MOVWF  77
+00C4:  RRF    77,F
+00C5:  RRF    77,F
+00C6:  MOVLW  1F
+00C7:  ANDWF  77,F
+00C8:  MOVF   77,W
+00C9:  ANDLW  01
+00CA:  BTFSS  03.2
+00CB:  GOTO   0CE
+00CC:  BCF    06.3
+00CD:  GOTO   0CF
+00CE:  BSF    06.3
+00CF:  BSF    03.5
+00D0:  BCF    06.3
+....................          output_bit(pin_B2, (value >> 2) & 1); 
+00D1:  BCF    03.5
+00D2:  RRF    41,W
+00D3:  MOVWF  77
+00D4:  RRF    77,F
+00D5:  MOVLW  3F
+00D6:  ANDWF  77,F
+00D7:  MOVF   77,W
+00D8:  ANDLW  01
+00D9:  BTFSS  03.2
+00DA:  GOTO   0DD
+00DB:  BCF    06.2
+00DC:  GOTO   0DE
+00DD:  BSF    06.2
+00DE:  BSF    03.5
+00DF:  BCF    06.2
+....................          output_bit(pin_B1, (value >> 1) & 1); 
+00E0:  BCF    03.0
+00E1:  BCF    03.5
+00E2:  RRF    41,W
+00E3:  ANDLW  01
+00E4:  BTFSS  03.2
+00E5:  GOTO   0E8
+00E6:  BCF    06.1
+00E7:  GOTO   0E9
+00E8:  BSF    06.1
+00E9:  BSF    03.5
+00EA:  BCF    06.1
+....................          output_bit(pin_B0, (value & 1)); 
+00EB:  BCF    03.5
+00EC:  BTFSC  41.0
+00ED:  GOTO   0F0
+00EE:  BCF    06.0
+00EF:  GOTO   0F1
+00F0:  BSF    06.0
+00F1:  BSF    03.5
+00F2:  BCF    06.0
+00F3:  BCF    03.5
+....................       } 
+....................         break; 
+00F4:  GOTO   198
+....................       } 
+....................       case 4: 
+....................       { 
+....................         // SECOND TENS 
+....................       if(value >= 0 && value <= 5) 
+00F5:  MOVF   41,W
+00F6:  SUBLW  05
+00F7:  BTFSS  03.0
+00F8:  GOTO   121
+....................       { 
+....................          output_bit(pin_C6, (value >> 2) & 1); 
+00F9:  RRF    41,W
+00FA:  MOVWF  77
+00FB:  RRF    77,F
+00FC:  MOVLW  3F
+00FD:  ANDWF  77,F
+00FE:  MOVF   77,W
+00FF:  ANDLW  01
+0100:  BTFSS  03.2
+0101:  GOTO   104
+0102:  BCF    07.6
+0103:  GOTO   105
+0104:  BSF    07.6
+0105:  BCF    38.6
+0106:  MOVF   38,W
+0107:  BSF    03.5
+0108:  MOVWF  07
+....................             output_bit(pin_C5, (value >> 1) & 1); 
+0109:  BCF    03.0
+010A:  BCF    03.5
+010B:  RRF    41,W
+010C:  ANDLW  01
+010D:  BTFSS  03.2
+010E:  GOTO   111
+010F:  BCF    07.5
+0110:  GOTO   112
+0111:  BSF    07.5
+0112:  BCF    38.5
+0113:  MOVF   38,W
+0114:  BSF    03.5
+0115:  MOVWF  07
+....................             output_bit(pin_C4, (value & 1)); 
+0116:  BCF    03.5
+0117:  BTFSC  41.0
+0118:  GOTO   11B
+0119:  BCF    07.4
+011A:  GOTO   11C
+011B:  BSF    07.4
+011C:  BCF    38.4
+011D:  MOVF   38,W
+011E:  BSF    03.5
+011F:  MOVWF  07
+0120:  BCF    03.5
+....................       }  
+....................       break; 
+0121:  GOTO   198
+....................       } 
+....................       case 5: 
+....................       { 
+....................       // SECOND ONES 
+....................       if(value >= 0 && value <= 9) 
+0122:  MOVF   41,W
+0123:  SUBLW  09
+0124:  BTFSS  03.0
+0125:  GOTO   160
+....................       { 
+....................          output_bit(pin_C3, (value >> 3) & 1); 
+0126:  RRF    41,W
+0127:  MOVWF  77
+0128:  RRF    77,F
+0129:  RRF    77,F
+012A:  MOVLW  1F
+012B:  ANDWF  77,F
+012C:  MOVF   77,W
+012D:  ANDLW  01
+012E:  BTFSS  03.2
+012F:  GOTO   132
+0130:  BCF    07.3
+0131:  GOTO   133
+0132:  BSF    07.3
+0133:  BCF    38.3
+0134:  MOVF   38,W
+0135:  BSF    03.5
+0136:  MOVWF  07
+....................          output_bit(pin_C2, (value >> 2) & 1); 
+0137:  BCF    03.5
+0138:  RRF    41,W
+0139:  MOVWF  77
+013A:  RRF    77,F
+013B:  MOVLW  3F
+013C:  ANDWF  77,F
+013D:  MOVF   77,W
+013E:  ANDLW  01
+013F:  BTFSS  03.2
+0140:  GOTO   143
+0141:  BCF    07.2
+0142:  GOTO   144
+0143:  BSF    07.2
+0144:  BCF    38.2
+0145:  MOVF   38,W
+0146:  BSF    03.5
+0147:  MOVWF  07
+....................          output_bit(pin_C1, (value >> 1) & 1); 
+0148:  BCF    03.0
+0149:  BCF    03.5
+014A:  RRF    41,W
+014B:  ANDLW  01
+014C:  BTFSS  03.2
+014D:  GOTO   150
+014E:  BCF    07.1
+014F:  GOTO   151
+0150:  BSF    07.1
+0151:  BCF    38.1
+0152:  MOVF   38,W
+0153:  BSF    03.5
+0154:  MOVWF  07
+....................          output_bit(pin_C0, (value & 1)); 
+0155:  BCF    03.5
+0156:  BTFSC  41.0
+0157:  GOTO   15A
+0158:  BCF    07.0
+0159:  GOTO   15B
+015A:  BSF    07.0
+015B:  BCF    38.0
+015C:  MOVF   38,W
+015D:  BSF    03.5
+015E:  MOVWF  07
+015F:  BCF    03.5
+....................       } 
+....................         break; 
+0160:  GOTO   198
+....................       }case 6: 
+....................       { 
+....................          // UTILITY 
+....................          if(value >= 0 && value <= 15) 
+0161:  MOVF   41,W
+0162:  SUBLW  0F
+0163:  BTFSS  03.0
+0164:  GOTO   197
+....................          { 
+....................             output_bit(pin_D3, (value >> 3) & 1); 
+0165:  RRF    41,W
+0166:  MOVWF  77
+0167:  RRF    77,F
+0168:  RRF    77,F
+0169:  MOVLW  1F
+016A:  ANDWF  77,F
+016B:  MOVF   77,W
+016C:  ANDLW  01
+016D:  BTFSS  03.2
+016E:  GOTO   171
+016F:  BCF    08.3
+0170:  GOTO   172
+0171:  BSF    08.3
+0172:  BSF    03.5
+0173:  BCF    08.3
+....................             output_bit(pin_D2, (value >> 2) & 1); 
+0174:  BCF    03.5
+0175:  RRF    41,W
+0176:  MOVWF  77
+0177:  RRF    77,F
+0178:  MOVLW  3F
+0179:  ANDWF  77,F
+017A:  MOVF   77,W
+017B:  ANDLW  01
+017C:  BTFSS  03.2
+017D:  GOTO   180
+017E:  BCF    08.2
+017F:  GOTO   181
+0180:  BSF    08.2
+0181:  BSF    03.5
+0182:  BCF    08.2
+....................             output_bit(pin_D1, (value >> 1) & 1); 
+0183:  BCF    03.0
+0184:  BCF    03.5
+0185:  RRF    41,W
+0186:  ANDLW  01
+0187:  BTFSS  03.2
+0188:  GOTO   18B
+0189:  BCF    08.1
+018A:  GOTO   18C
+018B:  BSF    08.1
+018C:  BSF    03.5
+018D:  BCF    08.1
+....................             output_bit(pin_D0, (value & 1)); 
+018E:  BCF    03.5
+018F:  BTFSC  41.0
+0190:  GOTO   193
+0191:  BCF    08.0
+0192:  GOTO   194
+0193:  BSF    08.0
+0194:  BSF    03.5
+0195:  BCF    08.0
+0196:  BCF    03.5
+....................          } 
+....................          break; 
+0197:  GOTO   198
+....................       } 
+....................       default: 
+....................       { 
+....................          // Do nothing! 
+....................          break; 
+....................       } 
+....................    } 
+0198:  RETURN
+.................... } 
+....................  
+.................... void printHourDigits(int8 value) 
+.................... { 
+....................    // Saat değerini birler ve onlar basamağına 
+....................    // ayırıp ayrı ayrı yazdırıyor 
+....................    if(value >= 0 && value <= 23) 
+*
+01EC:  MOVF   3F,W
+01ED:  SUBLW  17
+01EE:  BTFSS  03.0
+01EF:  GOTO   209
+....................    { 
+....................       hrOnes = value % 10; 
+01F0:  MOVF   3F,W
+01F1:  MOVWF  42
+01F2:  MOVLW  0A
+01F3:  MOVWF  43
+01F4:  CALL   199
+01F5:  MOVF   77,W
+01F6:  MOVWF  33
+....................       hrTens = (value - hrOnes) / 10; 
+01F7:  MOVF   33,W
+01F8:  SUBWF  3F,W
+01F9:  MOVWF  41
+01FA:  MOVWF  42
+01FB:  MOVLW  0A
+01FC:  MOVWF  43
+01FD:  CALL   199
+01FE:  MOVF   78,W
+01FF:  MOVWF  34
+....................       printDisplay(0, hrTens); 
+0200:  CLRF   40
+0201:  MOVF   34,W
+0202:  MOVWF  41
+0203:  CALL   031
+....................       printDisplay(1, hrOnes); 
+0204:  MOVLW  01
+0205:  MOVWF  40
+0206:  MOVF   33,W
+0207:  MOVWF  41
+0208:  CALL   031
+....................    } 
+0209:  RETURN
+.................... } 
+....................  
+.................... void printMinuteDigits(int8 value) 
+.................... { 
+....................    if(value >= 0 && value <= 59) 
+*
+01CD:  MOVF   3F,W
+01CE:  SUBLW  3B
+01CF:  BTFSS  03.0
+01D0:  GOTO   1EB
+....................    { 
+....................       minOnes = value % 10; 
+01D1:  MOVF   3F,W
+01D2:  MOVWF  42
+01D3:  MOVLW  0A
+01D4:  MOVWF  43
+01D5:  CALL   199
+01D6:  MOVF   77,W
+01D7:  MOVWF  31
+....................       minTens = (value - minOnes) / 10; 
+01D8:  MOVF   31,W
+01D9:  SUBWF  3F,W
+01DA:  MOVWF  41
+01DB:  MOVWF  42
+01DC:  MOVLW  0A
+01DD:  MOVWF  43
+01DE:  CALL   199
+01DF:  MOVF   78,W
+01E0:  MOVWF  32
+....................       printDisplay(2, minTens); 
+01E1:  MOVLW  02
+01E2:  MOVWF  40
+01E3:  MOVF   32,W
+01E4:  MOVWF  41
+01E5:  CALL   031
+....................       printDisplay(3, minOnes); 
+01E6:  MOVLW  03
+01E7:  MOVWF  40
+01E8:  MOVF   31,W
+01E9:  MOVWF  41
+01EA:  CALL   031
+....................    } 
+01EB:  RETURN
+.................... } 
+....................  
+.................... void printSecondDigits(int8 value) 
+.................... { 
+....................    if(value >= 0 && value <= 59) 
+*
+01AE:  MOVF   3F,W
+01AF:  SUBLW  3B
+01B0:  BTFSS  03.0
+01B1:  GOTO   1CC
+....................    { 
+....................       secOnes = value % 10; 
+01B2:  MOVF   3F,W
+01B3:  MOVWF  42
+01B4:  MOVLW  0A
+01B5:  MOVWF  43
+01B6:  CALL   199
+01B7:  MOVF   77,W
+01B8:  MOVWF  2F
+....................       secTens = (value - secOnes) / 10; 
+01B9:  MOVF   2F,W
+01BA:  SUBWF  3F,W
+01BB:  MOVWF  41
+01BC:  MOVWF  42
+01BD:  MOVLW  0A
+01BE:  MOVWF  43
+01BF:  CALL   199
+01C0:  MOVF   78,W
+01C1:  MOVWF  30
+....................       printDisplay(4, secTens); 
+01C2:  MOVLW  04
+01C3:  MOVWF  40
+01C4:  MOVF   30,W
+01C5:  MOVWF  41
+01C6:  CALL   031
+....................       printDisplay(5, secOnes); 
+01C7:  MOVLW  05
+01C8:  MOVWF  40
+01C9:  MOVF   2F,W
+01CA:  MOVWF  41
+01CB:  CALL   031
+....................    } 
+01CC:  RETURN
+.................... } 
+....................  
+.................... void printClock() 
+.................... { 
+....................    if(isMilChanged == 1) 
+*
+020A:  BTFSS  35.3
+020B:  GOTO   212
+....................     { 
+....................         isMilChanged = 0; 
+020C:  BCF    35.3
+....................       printDisplay(6, milis); 
+020D:  MOVLW  06
+020E:  MOVWF  40
+020F:  MOVF   29,W
+0210:  MOVWF  41
+0211:  CALL   031
+....................     } 
+....................     if(isSecChanged == 1) 
+0212:  BTFSS  35.2
+0213:  GOTO   218
+....................     { 
+....................        isSecChanged = 0; 
+0214:  BCF    35.2
+....................       printSecondDigits(second); 
+0215:  MOVF   2A,W
+0216:  MOVWF  3F
+0217:  CALL   1AE
+....................     } 
+....................     if(isMinChanged == 1) 
+0218:  BTFSS  35.1
+0219:  GOTO   21E
+....................     { 
+....................       isMinChanged = 0; 
+021A:  BCF    35.1
+....................      printMinuteDigits(minute); 
+021B:  MOVF   2B,W
+021C:  MOVWF  3F
+021D:  CALL   1CD
+....................     } 
+....................     if(isHourChanged == 1) 
+021E:  BTFSS  35.0
+021F:  GOTO   224
+....................     { 
+....................       isHourChanged = 0; 
+0220:  BCF    35.0
+....................      printHourDigits(hour); 
+0221:  MOVF   2C,W
+0222:  MOVWF  3F
+0223:  CALL   1EC
+....................     } 
+0224:  RETURN
+.................... } 
+.................... void printAlarm() 
+*
+025A:  CLRF   27
+025B:  BTFSC  0B.7
+025C:  BSF    27.7
+025D:  BCF    0B.7
+.................... { 
+....................    printHourDigits(alarmHour); 
+025E:  MOVF   2E,W
+025F:  MOVWF  3F
+0260:  CALL   1EC
+0261:  BTFSC  27.7
+0262:  BSF    0B.7
+0263:  CLRF   27
+0264:  BTFSC  0B.7
+0265:  BSF    27.7
+0266:  BCF    0B.7
+....................    printMinuteDigits(alarmMin); 
+0267:  MOVF   2D,W
+0268:  MOVWF  3F
+0269:  CALL   1CD
+026A:  BTFSC  27.7
+026B:  BSF    0B.7
+026C:  CLRF   27
+026D:  BTFSC  0B.7
+026E:  BSF    27.7
+026F:  BCF    0B.7
+....................    printSecondDigits(0); 
+0270:  CLRF   3F
+0271:  CALL   1AE
+0272:  BTFSC  27.7
+0273:  BSF    0B.7
+0274:  RETURN
+.................... } 
+....................  
+.................... void checkAlarm() 
+.................... { 
+.................... 	if(alarmHour - hour == 0 && alarmMin - minute == 0) 
+*
+0289:  MOVF   2C,W
+028A:  SUBWF  2E,W
+028B:  BTFSS  03.2
+028C:  GOTO   295
+028D:  MOVF   2B,W
+028E:  SUBWF  2D,W
+028F:  BTFSS  03.2
+0290:  GOTO   295
+.................... 	{ 
+.................... 		setActive(TRUE); 
+0291:  MOVLW  01
+0292:  MOVWF  39
+0293:  CALL   24E
+.................... 	} 
+0294:  GOTO   297
+.................... 	else 
+.................... 	{ 
+.................... 		setActive(FALSE); 
+0295:  CLRF   39
+0296:  CALL   24E
+.................... 	} 
+0297:  BCF    0A.3
+0298:  BCF    0A.4
+0299:  GOTO   3E2 (RETURN)
+.................... }	 
 ....................  
 .................... #INT_TIMER1 
 .................... void TIMER_isr(void) 
 .................... { 
-....................     if(isPaused == 0) 
-00DE:  BTFSC  34.1
-00DF:  GOTO   104
+....................     if(mode == 0) 
+*
+0225:  MOVF   37,F
+0226:  BTFSS  03.2
+0227:  GOTO   24A
 ....................     { 
-....................         tick++; 
-00E0:  INCF   28,F
+....................       tick++; 
+0228:  INCF   28,F
 ....................       if(tick >= 6) 
-00E1:  MOVF   28,W
-00E2:  SUBLW  05
-00E3:  BTFSC  03.0
-00E4:  GOTO   103
+0229:  MOVF   28,W
+022A:  SUBLW  05
+022B:  BTFSC  03.0
+022C:  GOTO   249
 ....................       { 
 ....................          tick = 0; 
-00E5:  CLRF   28
-....................          isD = 1; 
-00E6:  BSF    33.3
+022D:  CLRF   28
+....................          isMilChanged = 1; 
+022E:  BSF    35.3
 ....................          milis++; 
-00E7:  INCF   29,F
+022F:  INCF   29,F
 ....................          if(milis >= 10) 
-00E8:  MOVF   29,W
-00E9:  SUBLW  09
-00EA:  BTFSC  03.0
-00EB:  GOTO   103
+0230:  MOVF   29,W
+0231:  SUBLW  09
+0232:  BTFSC  03.0
+0233:  GOTO   249
 ....................          { 
 ....................             milis = 0; 
-00EC:  CLRF   29
-....................             isC = 1; 
-00ED:  BSF    33.2
+0234:  CLRF   29
+....................             isSecChanged = 1; 
+0235:  BSF    35.2
 ....................             second++; 
-00EE:  INCF   2A,F
+0236:  INCF   2A,F
 ....................             if(second >= 60) 
-00EF:  MOVF   2A,W
-00F0:  SUBLW  3B
-00F1:  BTFSC  03.0
-00F2:  GOTO   103
+0237:  MOVF   2A,W
+0238:  SUBLW  3B
+0239:  BTFSC  03.0
+023A:  GOTO   249
 ....................             { 
 ....................                second = 0; 
-00F3:  CLRF   2A
-....................                isB = 1; 
-00F4:  BSF    33.1
+023B:  CLRF   2A
+....................                isMinChanged = 1; 
+023C:  BSF    35.1
 ....................                minute++; 
-00F5:  INCF   2B,F
+023D:  INCF   2B,F
 ....................                if(minute >= 60) 
-00F6:  MOVF   2B,W
-00F7:  SUBLW  3B
-00F8:  BTFSC  03.0
-00F9:  GOTO   103
+023E:  MOVF   2B,W
+023F:  SUBLW  3B
+0240:  BTFSC  03.0
+0241:  GOTO   249
 ....................                { 
 ....................                   minute = 0; 
-00FA:  CLRF   2B
-....................                   isA = 1; 
-00FB:  BSF    33.0
+0242:  CLRF   2B
+....................                   isHourChanged = 1; 
+0243:  BSF    35.0
 ....................                   hour++; 
-00FC:  INCF   2C,F
+0244:  INCF   2C,F
 ....................                   if(hour >= 24) 
-00FD:  MOVF   2C,W
-00FE:  SUBLW  17
-00FF:  BTFSC  03.0
-0100:  GOTO   103
+0245:  MOVF   2C,W
+0246:  SUBLW  17
+0247:  BTFSS  03.0
 ....................                   { 
 ....................                      hour = 0; 
-0101:  CLRF   2C
-....................                      isE = 1; 
-0102:  BSF    33.4
+0248:  CLRF   2C
 ....................                   } 
 ....................                } 
 ....................             } 
 ....................          } 
 ....................       } 
-....................       renderClock(); 
-0103:  CALL   046
+....................       printClock(); 
+0249:  CALL   20A
 ....................    }    
-0104:  BCF    0C.0
-0105:  BCF    0A.3
-0106:  BCF    0A.4
-0107:  GOTO   01D
+024A:  BCF    0C.0
+024B:  BCF    0A.3
+024C:  BCF    0A.4
+024D:  GOTO   01D
 .................... } 
+....................  
+....................  
 .................... void main() 
 *
-011C:  CLRF   28
-011D:  CLRF   29
-011E:  CLRF   2A
-011F:  CLRF   2B
-0120:  CLRF   2C
-0121:  CLRF   2D
-0122:  CLRF   2E
-0123:  CLRF   2F
-0124:  CLRF   30
-0125:  CLRF   31
-0126:  CLRF   32
-0127:  BSF    33.0
-0128:  BSF    33.1
-0129:  BSF    33.2
-012A:  BSF    33.3
-012B:  BSF    33.4
-012C:  BCF    33.5
-012D:  BCF    33.6
-012E:  BCF    33.7
-012F:  BCF    34.0
-0130:  CLRF   35
-0131:  BCF    34.1
-0132:  MOVLW  FF
-0133:  MOVWF  36
-0134:  BSF    03.5
-0135:  BSF    1F.0
-0136:  BSF    1F.1
-0137:  BSF    1F.2
-0138:  BCF    1F.3
-0139:  MOVLW  07
-013A:  MOVWF  1C
-013B:  BCF    03.7
-013C:  MOVLW  1F
-013D:  ANDWF  03,F
-.................... { 
-....................    setup_timer_1(T1_INTERNAL | T1_DIV_BY_1); 
-013E:  MOVLW  85
-013F:  BCF    03.5
-0140:  MOVWF  10
-....................    set_timer1(77); 
-0141:  CLRF   0E
-0142:  CLRF   0F
-0143:  MOVLW  4D
-0144:  MOVWF  0E
-....................    clear_interrupt(INT_TIMER1); 
-0145:  BCF    0C.0
-....................    enable_interrupts(INT_TIMER1); 
-0146:  BSF    03.5
-0147:  BSF    0C.0
-....................    enable_interrupts(GLOBAL); 
-0148:  MOVLW  C0
-0149:  BCF    03.5
-014A:  IORWF  0B,F
-....................    set_tris_d(255); 
-014B:  MOVLW  FF
-014C:  BSF    03.5
-014D:  MOVWF  08
-....................     
-....................    while(TRUE) 
-....................    { 
-....................       // GET ALL SETTINGS 
-....................       d4 = input(pin_D4); 
-014E:  BSF    08.4
-014F:  BCF    03.5
-0150:  BCF    33.5
-0151:  BTFSC  08.4
-0152:  BSF    33.5
-....................       d5 = input(pin_D5); 
-0153:  BSF    03.5
-0154:  BSF    08.5
-0155:  BCF    03.5
-0156:  BCF    33.6
-0157:  BTFSC  08.5
-0158:  BSF    33.6
-....................       d6 = input(pin_D6); 
-0159:  BSF    03.5
-015A:  BSF    08.6
-015B:  BCF    03.5
-015C:  BCF    33.7
-015D:  BTFSC  08.6
-015E:  BSF    33.7
-....................       d7 = input(pin_D7); 
-015F:  BSF    03.5
-0160:  BSF    08.7
-0161:  BCF    03.5
-0162:  BCF    34.0
-0163:  BTFSC  08.7
-0164:  BSF    34.0
-....................       // 
-....................       if(d7) 
-0165:  BTFSS  34.0
-0166:  GOTO   172
-....................       { 
-....................          // PLAY / PAUSE 
-....................          isPaused++; // 1 bit value its toggling between 1 and 0 
-0167:  MOVLW  02
-0168:  XORWF  34,F
-....................          delay_ms(200); 
-0169:  MOVLW  C8
-016A:  MOVWF  37
-016B:  CALL   108
-....................          selection = 0; 
-016C:  CLRF   35
-....................          while(input(pin_D4)); 
-016D:  BSF    03.5
-016E:  BSF    08.4
-016F:  BCF    03.5
-0170:  BTFSC  08.4
-0171:  GOTO   16D
-....................       } 
-....................        
-....................       if(isPaused == 1) 
-0172:  BTFSS  34.1
-0173:  GOTO   1F1
-....................       { 
-....................          // SETUP MODE 
-....................          if(d6) 
-0174:  BTFSS  33.7
-0175:  GOTO   183
-....................          { 
-....................             // Digit Selector 
-....................             selection++; 
-0176:  INCF   35,F
-....................             if(selection > 3) 
-0177:  MOVF   35,W
-0178:  SUBLW  03
-0179:  BTFSS  03.0
-....................             { 
-....................                selection = 0; 
-017A:  CLRF   35
-....................             } 
-....................             delay_ms(200); 
-017B:  MOVLW  C8
-017C:  MOVWF  37
-017D:  CALL   108
-....................             while(input(pin_D6)); 
-017E:  BSF    03.5
-017F:  BSF    08.6
-0180:  BCF    03.5
-0181:  BTFSC  08.6
-0182:  GOTO   17E
-....................          } 
-....................          if(d5) 
-0183:  BTFSS  33.6
-0184:  GOTO   1B6
-....................          { 
-....................             // Increase Selected Digit 
-....................             switch(selection) 
-0185:  MOVF   35,W
-0186:  ADDLW  FC
-0187:  BTFSC  03.0
-0188:  GOTO   1A7
-0189:  ADDLW  04
-018A:  GOTO   1F7
-....................             { 
-....................                case 0: 
-....................                { 
-....................                   // HOUR 
-....................                   hour++; 
-018B:  INCF   2C,F
-....................                   if(hour >= 24) 
-018C:  MOVF   2C,W
-018D:  SUBLW  17
-018E:  BTFSS  03.0
-....................                   { 
-....................                      hour = 0; 
-018F:  CLRF   2C
-....................                   } 
-....................                   isE = 1; 
-0190:  BSF    33.4
-....................                   isA = 1; 
-0191:  BSF    33.0
-....................                   break; 
-0192:  GOTO   1A7
-....................                } 
-....................                case 1: 
-....................                { 
-....................                   // MINUTE 
-....................                   minute++; 
-0193:  INCF   2B,F
-....................                   if(minute >= 60) 
-0194:  MOVF   2B,W
-0195:  SUBLW  3B
-0196:  BTFSS  03.0
-....................                   { 
-....................                      minute = 0; 
-0197:  CLRF   2B
-....................                   } 
-....................                   isB = 1; 
-0198:  BSF    33.1
-....................                   break; 
-0199:  GOTO   1A7
-....................                } 
-....................                case 2: 
-....................                { 
-....................                   // SECOND 
-....................                   second++; 
-019A:  INCF   2A,F
-....................                   if(second >= 60) 
-019B:  MOVF   2A,W
-019C:  SUBLW  3B
-019D:  BTFSS  03.0
-....................                   { 
-....................                      second = 0; 
-019E:  CLRF   2A
-....................                   } 
-....................                   isC = 1; 
-019F:  BSF    33.2
-....................                   break; 
-01A0:  GOTO   1A7
-....................                } 
-....................                case 3: 
-....................                { 
-....................                   // MILISECOND 
-....................                   milis++; 
-01A1:  INCF   29,F
-....................                   if(milis >= 10) 
-01A2:  MOVF   29,W
-01A3:  SUBLW  09
-01A4:  BTFSS  03.0
-....................                   { 
-....................                      milis = 0; 
-01A5:  CLRF   29
-....................                   } 
-....................                   isD = 1; 
-01A6:  BSF    33.3
-....................                   break; 
-....................                } 
-....................             } 
-01A7:  CLRF   27
-01A8:  BTFSC  0B.7
-01A9:  BSF    27.7
-01AA:  BCF    0B.7
-....................             renderClock(); 
-01AB:  CALL   046
-01AC:  BTFSC  27.7
-01AD:  BSF    0B.7
-....................             delay_ms(200); 
-01AE:  MOVLW  C8
-01AF:  MOVWF  37
-01B0:  CALL   108
-....................             while(input(pin_D5)); 
-01B1:  BSF    03.5
-01B2:  BSF    08.5
-01B3:  BCF    03.5
-01B4:  BTFSC  08.5
-01B5:  GOTO   1B1
-....................          } 
-....................          if(d4) 
-01B6:  BTFSS  33.5
-01B7:  GOTO   1F1
-....................          { 
-....................             // Reduce Selected Digit 
-....................             switch(selection) 
-01B8:  MOVF   35,W
-01B9:  ADDLW  FC
-01BA:  BTFSC  03.0
-01BB:  GOTO   1E2
-01BC:  ADDLW  04
-01BD:  GOTO   1FF
-....................             { 
-....................                case 0: 
-....................                { 
-....................                   // HOUR 
-....................                   if(hour == 0) 
-01BE:  MOVF   2C,F
-01BF:  BTFSS  03.2
-01C0:  GOTO   1C4
-....................                   { 
-....................                      hour = 23; 
-01C1:  MOVLW  17
-01C2:  MOVWF  2C
-....................                   } 
-01C3:  GOTO   1C5
-....................                   else 
-....................                   { 
-....................                      hour--; 
-01C4:  DECF   2C,F
-....................                   } 
-....................                   isE = 1; 
-01C5:  BSF    33.4
-....................                   isA = 1; 
-01C6:  BSF    33.0
-....................                   break; 
-01C7:  GOTO   1E2
-....................                } 
-....................                case 1: 
-....................                { 
-....................                   // MINUTE 
-....................                   if(minute == 0) 
-01C8:  MOVF   2B,F
-01C9:  BTFSS  03.2
-01CA:  GOTO   1CE
-....................                   { 
-....................                      minute = 59; 
-01CB:  MOVLW  3B
-01CC:  MOVWF  2B
-....................                   } 
-01CD:  GOTO   1CF
-....................                   else 
-....................                   { 
-....................                      minute--; 
-01CE:  DECF   2B,F
-....................                   } 
-....................                   isB = 1; 
-01CF:  BSF    33.1
-....................                   break; 
-01D0:  GOTO   1E2
-....................                } 
-....................                case 2: 
-....................                { 
-....................                   // SECOND 
-....................                   if(second == 0) 
-01D1:  MOVF   2A,F
-01D2:  BTFSS  03.2
-01D3:  GOTO   1D7
-....................                   { 
-....................                      second = 59; 
-01D4:  MOVLW  3B
-01D5:  MOVWF  2A
-....................                   } 
-01D6:  GOTO   1D8
-....................                   else 
-....................                   { 
-....................                      second--; 
-01D7:  DECF   2A,F
-....................                   } 
-....................                   isC = 1; 
-01D8:  BSF    33.2
-....................                   break; 
-01D9:  GOTO   1E2
-....................                } 
-....................                case 3: 
-....................                { 
-....................                   // MILISECOND 
-....................                   if(milis == 0) 
-01DA:  MOVF   29,F
-01DB:  BTFSS  03.2
-01DC:  GOTO   1E0
-....................                   { 
-....................                      milis = 9; 
-01DD:  MOVLW  09
-01DE:  MOVWF  29
-....................                   } 
-01DF:  GOTO   1E1
-....................                   else 
-....................                   { 
-....................                      milis--; 
-01E0:  DECF   29,F
-....................                   } 
-....................                   isD = 1; 
-01E1:  BSF    33.3
-....................                   break; 
-....................                } 
-....................             } 
-01E2:  CLRF   27
-01E3:  BTFSC  0B.7
-01E4:  BSF    27.7
-01E5:  BCF    0B.7
-....................             renderClock(); 
-01E6:  CALL   046
-01E7:  BTFSC  27.7
-01E8:  BSF    0B.7
-....................             delay_ms(200); 
-01E9:  MOVLW  C8
-01EA:  MOVWF  37
-01EB:  CALL   108
-....................             while(input(pin_D4)); 
-01EC:  BSF    03.5
-01ED:  BSF    08.4
-01EE:  BCF    03.5
-01EF:  BTFSC  08.4
-01F0:  GOTO   1EC
-....................          } 
-....................       } 
-....................       delay_ms(50); 
-01F1:  MOVLW  32
-01F2:  MOVWF  37
-01F3:  CALL   108
-01F4:  BSF    03.5
-01F5:  GOTO   14E
-....................    } 
+029A:  CLRF   28
+029B:  CLRF   29
+029C:  MOVLW  1E
+029D:  MOVWF  2A
+029E:  MOVLW  02
+029F:  MOVWF  2B
+02A0:  MOVLW  11
+02A1:  MOVWF  2C
+02A2:  MOVLW  03
+02A3:  MOVWF  2D
+02A4:  MOVLW  11
+02A5:  MOVWF  2E
+02A6:  CLRF   2F
+02A7:  CLRF   30
+02A8:  CLRF   31
+02A9:  CLRF   32
+02AA:  CLRF   33
+02AB:  CLRF   34
+02AC:  BSF    35.0
+02AD:  BSF    35.1
+02AE:  BSF    35.2
+02AF:  BSF    35.3
+02B0:  BCF    35.4
+02B1:  BCF    35.5
+02B2:  BCF    35.6
+02B3:  BCF    35.7
+02B4:  CLRF   36
+02B5:  CLRF   37
+02B6:  MOVLW  FF
+02B7:  MOVWF  38
+02B8:  BSF    03.5
+02B9:  BSF    1F.0
+02BA:  BSF    1F.1
+02BB:  BSF    1F.2
+02BC:  BCF    1F.3
+02BD:  MOVLW  07
+02BE:  MOVWF  1C
+02BF:  BCF    03.7
+02C0:  MOVLW  1F
+02C1:  ANDWF  03,F
+.................... {    
+.................... 	// SETTINGS 
+.................... 	setup_timer_1(T1_INTERNAL | T1_DIV_BY_1); 
+02C2:  MOVLW  85
+02C3:  BCF    03.5
+02C4:  MOVWF  10
+.................... 	set_timer1(77); 
+02C5:  CLRF   0E
+02C6:  CLRF   0F
+02C7:  MOVLW  4D
+02C8:  MOVWF  0E
+.................... 	clear_interrupt(INT_TIMER1); 
+02C9:  BCF    0C.0
+.................... 	enable_interrupts(INT_TIMER1); 
+02CA:  BSF    03.5
+02CB:  BSF    0C.0
+.................... 	enable_interrupts(GLOBAL); 
+02CC:  MOVLW  C0
+02CD:  BCF    03.5
+02CE:  IORWF  0B,F
+.................... 	setActive(FALSE); 
+02CF:  CLRF   39
+02D0:  CALL   24E
+....................  
+.................... 	while(TRUE) 
+.................... 	{ 
+.................... 		// GET ALL SETTINGS 
+.................... 		d4 = input(pin_D4); // 
+02D1:  BSF    03.5
+02D2:  BSF    08.4
+02D3:  BCF    03.5
+02D4:  BCF    35.4
+02D5:  BTFSC  08.4
+02D6:  BSF    35.4
+.................... 		d5 = input(pin_D5); 
+02D7:  BSF    03.5
+02D8:  BSF    08.5
+02D9:  BCF    03.5
+02DA:  BCF    35.5
+02DB:  BTFSC  08.5
+02DC:  BSF    35.5
+.................... 		d6 = input(pin_D6); 
+02DD:  BSF    03.5
+02DE:  BSF    08.6
+02DF:  BCF    03.5
+02E0:  BCF    35.6
+02E1:  BTFSC  08.6
+02E2:  BSF    35.6
+.................... 		d7 = input(pin_D7); 
+02E3:  BSF    03.5
+02E4:  BSF    08.7
+02E5:  BCF    03.5
+02E6:  BCF    35.7
+02E7:  BTFSC  08.7
+02E8:  BSF    35.7
+.................... 		// 
+.................... 		if(d7) 
+02E9:  BTFSS  35.7
+02EA:  GOTO   328
+.................... 		{ 
+.................... 			// CLOCK / SETTING / ALARM 
+.................... 			mode++; 
+02EB:  INCF   37,F
+.................... 			if(mode > 2) 
+02EC:  MOVF   37,W
+02ED:  SUBLW  02
+02EE:  BTFSC  03.0
+02EF:  GOTO   2FC
+.................... 			{ 
+.................... 				mode = 0; 
+02F0:  CLRF   37
+.................... 				isHourChanged = 1; 
+02F1:  BSF    35.0
+.................... 				isMinChanged = 1; 
+02F2:  BSF    35.1
+.................... 				isSecChanged = 1; 
+02F3:  BSF    35.2
+.................... 				isMilChanged = 1; 
+02F4:  BSF    35.3
+02F5:  CLRF   27
+02F6:  BTFSC  0B.7
+02F7:  BSF    27.7
+02F8:  BCF    0B.7
+.................... 				printClock(); 
+02F9:  CALL   20A
+02FA:  BTFSC  27.7
+02FB:  BSF    0B.7
+.................... 			} 
+.................... 			// 
+.................... 			switch(mode) 
+02FC:  MOVF   37,W
+02FD:  XORLW  01
+02FE:  BTFSC  03.2
+02FF:  GOTO   304
+0300:  XORLW  03
+0301:  BTFSC  03.2
+0302:  GOTO   310
+0303:  GOTO   31D
+.................... 			{ 
+.................... 				case 1: 
+0304:  CLRF   27
+0305:  BTFSC  0B.7
+0306:  BSF    27.7
+0307:  BCF    0B.7
+.................... 				{ 
+.................... 					// CHANGE CLOCK 
+.................... 					printDisplay(6, 12); // 12 = 0xC = CLOCK 
+0308:  MOVLW  06
+0309:  MOVWF  40
+030A:  MOVLW  0C
+030B:  MOVWF  41
+030C:  CALL   031
+030D:  BTFSC  27.7
+030E:  BSF    0B.7
+.................... 					break; 
+030F:  GOTO   31D
+.................... 				} 
+.................... 				case 2: 
+0310:  CLRF   27
+0311:  BTFSC  0B.7
+0312:  BSF    27.7
+0313:  BCF    0B.7
+.................... 				{ 
+.................... 					// CHANGE ALARM 
+.................... 					printDisplay(6, 10); //10 = 0xA = ALARM 
+0314:  MOVLW  06
+0315:  MOVWF  40
+0316:  MOVLW  0A
+0317:  MOVWF  41
+0318:  CALL   031
+0319:  BTFSC  27.7
+031A:  BSF    0B.7
+.................... 					printAlarm(); 
+031B:  CALL   25A
+.................... 					break; 
+031C:  GOTO   31D
+.................... 				} 
+.................... 				default: 
+.................... 				{ 
+.................... 					break; 
+.................... 				} 
+.................... 			} 
+.................... 			// 
+.................... 			selection = 0; 
+031D:  CLRF   36
+.................... 			setActive(FALSE); 
+031E:  CLRF   39
+031F:  CALL   24E
+.................... 			delay_ms(100); 
+0320:  MOVLW  64
+0321:  MOVWF  39
+0322:  CALL   275
+.................... 			while(input(pin_D7)); 
+0323:  BSF    03.5
+0324:  BSF    08.7
+0325:  BCF    03.5
+0326:  BTFSC  08.7
+0327:  GOTO   323
+.................... 		} 
+.................... 		if(d6) 
+0328:  BTFSS  35.6
+0329:  GOTO   345
+.................... 		{ 
+.................... 			// SELECT DIGIT 
+.................... 			if(mode != 0) 
+032A:  MOVF   37,F
+032B:  BTFSC  03.2
+032C:  GOTO   33D
+.................... 			{ 
+.................... 				selection++; 
+032D:  INCF   36,F
+.................... 				if(mode == 1) 
+032E:  DECFSZ 37,W
+032F:  GOTO   335
+.................... 				{ 
+.................... 					if(selection >= 3) 
+0330:  MOVF   36,W
+0331:  SUBLW  02
+0332:  BTFSS  03.0
+.................... 					{ 
+.................... 						selection = 0; 
+0333:  CLRF   36
+.................... 					} 
+.................... 				} 
+0334:  GOTO   33D
+.................... 				else if(mode == 2) 
+0335:  MOVF   37,W
+0336:  SUBLW  02
+0337:  BTFSS  03.2
+0338:  GOTO   33D
+.................... 				{ 
+.................... 					if(selection >= 2) 
+0339:  MOVF   36,W
+033A:  SUBLW  01
+033B:  BTFSS  03.0
+.................... 					{ 
+.................... 						selection = 0; 
+033C:  CLRF   36
+.................... 					} 
+.................... 				} 
+.................... 			} 
+.................... 			delay_ms(100); 
+033D:  MOVLW  64
+033E:  MOVWF  39
+033F:  CALL   275
+.................... 			while(input(pin_D6)); 
+0340:  BSF    03.5
+0341:  BSF    08.6
+0342:  BCF    03.5
+0343:  BTFSC  08.6
+0344:  GOTO   340
+.................... 		} 
+.................... 		if(d5) 
+0345:  BTFSS  35.5
+0346:  GOTO   38E
+.................... 		{ 
+.................... 			// Increase Selected Digit 
+.................... 			if(mode == 1) 
+0347:  DECFSZ 37,W
+0348:  GOTO   36F
+.................... 			{ 
+.................... 				// CLOCK 
+.................... 				switch(selection) 
+0349:  MOVF   36,W
+034A:  BTFSC  03.2
+034B:  GOTO   353
+034C:  XORLW  01
+034D:  BTFSC  03.2
+034E:  GOTO   35A
+034F:  XORLW  03
+0350:  BTFSC  03.2
+0351:  GOTO   361
+0352:  GOTO   367
+.................... 				{ 
+.................... 					case 0: 
+.................... 					{ 
+.................... 						// HOUR 
+.................... 						hour++; 
+0353:  INCF   2C,F
+.................... 						if(hour >= 24) 
+0354:  MOVF   2C,W
+0355:  SUBLW  17
+0356:  BTFSS  03.0
+.................... 						{ 
+.................... 							hour = 0; 
+0357:  CLRF   2C
+.................... 						} 
+.................... 						isHourChanged = 1; 
+0358:  BSF    35.0
+.................... 						break; 
+0359:  GOTO   367
+.................... 					} 
+.................... 					case 1: 
+.................... 					{ 
+.................... 						// MINUTE 
+.................... 						minute++; 
+035A:  INCF   2B,F
+.................... 						if(minute >= 60) 
+035B:  MOVF   2B,W
+035C:  SUBLW  3B
+035D:  BTFSS  03.0
+.................... 						{ 
+.................... 							minute = 0; 
+035E:  CLRF   2B
+.................... 						} 
+.................... 						isMinChanged = 1; 
+035F:  BSF    35.1
+.................... 						break; 
+0360:  GOTO   367
+.................... 					} 
+.................... 					case 2: 
+.................... 					{ 
+.................... 						// SECOND 
+.................... 						second++; 
+0361:  INCF   2A,F
+.................... 						if(second >= 60) 
+0362:  MOVF   2A,W
+0363:  SUBLW  3B
+0364:  BTFSS  03.0
+.................... 						{ 
+.................... 							second = 0; 
+0365:  CLRF   2A
+.................... 						} 
+.................... 						isSecChanged = 1; 
+0366:  BSF    35.2
+.................... 						break; 
+0367:  CLRF   27
+0368:  BTFSC  0B.7
+0369:  BSF    27.7
+036A:  BCF    0B.7
+.................... 					}					 
+.................... 				} 
+.................... 				printClock(); 
+036B:  CALL   20A
+036C:  BTFSC  27.7
+036D:  BSF    0B.7
+.................... 			} 
+036E:  GOTO   386
+.................... 			else if(mode == 2) 
+036F:  MOVF   37,W
+0370:  SUBLW  02
+0371:  BTFSS  03.2
+0372:  GOTO   386
+.................... 			{ 
+.................... 				// ALARM 
+.................... 				switch(selection) 
+0373:  MOVF   36,W
+0374:  BTFSC  03.2
+0375:  GOTO   37A
+0376:  XORLW  01
+0377:  BTFSC  03.2
+0378:  GOTO   380
+0379:  GOTO   385
+.................... 				{ 
+.................... 					case 0: 
+.................... 					{ 
+.................... 						// HOUR 
+.................... 						alarmHour++; 
+037A:  INCF   2E,F
+.................... 						if(alarmHour >= 24) 
+037B:  MOVF   2E,W
+037C:  SUBLW  17
+037D:  BTFSS  03.0
+.................... 						{ 
+.................... 							alarmHour = 0; 
+037E:  CLRF   2E
+.................... 						} 
+.................... 						break; 
+037F:  GOTO   385
+.................... 					} 
+.................... 					case 1: 
+.................... 					{ 
+.................... 						// MINUTE 
+.................... 						alarmMin++; 
+0380:  INCF   2D,F
+.................... 						if(alarmMin >= 60) 
+0381:  MOVF   2D,W
+0382:  SUBLW  3B
+0383:  BTFSS  03.0
+.................... 						{ 
+.................... 							alarmMin = 0; 
+0384:  CLRF   2D
+.................... 						} 
+.................... 						break; 
+.................... 					} 
+.................... 				} 
+.................... 				printAlarm(); 
+0385:  CALL   25A
+.................... 			} 
+.................... 			delay_ms(100); 
+0386:  MOVLW  64
+0387:  MOVWF  39
+0388:  CALL   275
+.................... 			while(input(pin_D5)); 
+0389:  BSF    03.5
+038A:  BSF    08.5
+038B:  BCF    03.5
+038C:  BTFSC  08.5
+038D:  GOTO   389
+.................... 		} 
+.................... 		if(d4) 
+038E:  BTFSS  35.4
+038F:  GOTO   3E1
+.................... 		{ 
+.................... 			// Reduce Selected Digit 
+.................... 			if(mode == 1) 
+0390:  DECFSZ 37,W
+0391:  GOTO   3BE
+.................... 			{ 
+.................... 				// CLOCK 
+.................... 				switch(selection) 
+0392:  MOVF   36,W
+0393:  BTFSC  03.2
+0394:  GOTO   39C
+0395:  XORLW  01
+0396:  BTFSC  03.2
+0397:  GOTO   3A5
+0398:  XORLW  03
+0399:  BTFSC  03.2
+039A:  GOTO   3AE
+039B:  GOTO   3B6
+.................... 				{ 
+.................... 					case 0: 
+.................... 					{ 
+.................... 						// HOUR 
+.................... 						if(hour == 0) 
+039C:  MOVF   2C,F
+039D:  BTFSS  03.2
+039E:  GOTO   3A2
+.................... 						{ 
+.................... 							hour = 23; 
+039F:  MOVLW  17
+03A0:  MOVWF  2C
+.................... 						} 
+03A1:  GOTO   3A3
+.................... 						else 
+.................... 						{ 
+.................... 							hour--; 
+03A2:  DECF   2C,F
+.................... 						} 
+.................... 						isHourChanged = 1; 
+03A3:  BSF    35.0
+.................... 						break; 
+03A4:  GOTO   3B6
+.................... 					} 
+.................... 					case 1: 
+.................... 					{ 
+.................... 						// MINUTE 
+.................... 						if(minute == 0) 
+03A5:  MOVF   2B,F
+03A6:  BTFSS  03.2
+03A7:  GOTO   3AB
+.................... 						{ 
+.................... 							minute = 59; 
+03A8:  MOVLW  3B
+03A9:  MOVWF  2B
+.................... 						} 
+03AA:  GOTO   3AC
+.................... 						else 
+.................... 						{ 
+.................... 							minute--; 
+03AB:  DECF   2B,F
+.................... 						} 
+.................... 						isMinChanged = 1; 
+03AC:  BSF    35.1
+.................... 						break; 
+03AD:  GOTO   3B6
+.................... 					} 
+.................... 					case 2: 
+.................... 					{ 
+.................... 						// SECOND 
+.................... 						if(second == 0) 
+03AE:  MOVF   2A,F
+03AF:  BTFSS  03.2
+03B0:  GOTO   3B4
+.................... 						{ 
+.................... 							second = 59; 
+03B1:  MOVLW  3B
+03B2:  MOVWF  2A
+.................... 						} 
+03B3:  GOTO   3B5
+.................... 						else 
+.................... 						{ 
+.................... 							second--; 
+03B4:  DECF   2A,F
+.................... 						} 
+.................... 						isSecChanged = 1; 
+03B5:  BSF    35.2
+.................... 						break; 
+03B6:  CLRF   27
+03B7:  BTFSC  0B.7
+03B8:  BSF    27.7
+03B9:  BCF    0B.7
+.................... 					} 
+.................... 				} 
+.................... 				printClock(); 
+03BA:  CALL   20A
+03BB:  BTFSC  27.7
+03BC:  BSF    0B.7
+.................... 			} 
+03BD:  GOTO   3D9
+.................... 			else if(mode == 2) 
+03BE:  MOVF   37,W
+03BF:  SUBLW  02
+03C0:  BTFSS  03.2
+03C1:  GOTO   3D9
+.................... 			{ 
+.................... 				// ALARM 
+.................... 				switch(selection) 
+03C2:  MOVF   36,W
+03C3:  BTFSC  03.2
+03C4:  GOTO   3C9
+03C5:  XORLW  01
+03C6:  BTFSC  03.2
+03C7:  GOTO   3D1
+03C8:  GOTO   3D8
+.................... 				{ 
+.................... 					case 0: 
+.................... 					{ 
+.................... 						// HOUR 
+.................... 						if(alarmHour == 0) 
+03C9:  MOVF   2E,F
+03CA:  BTFSS  03.2
+03CB:  GOTO   3CF
+.................... 						{ 
+.................... 							alarmHour = 23; 
+03CC:  MOVLW  17
+03CD:  MOVWF  2E
+.................... 						} 
+03CE:  GOTO   3D0
+.................... 						else 
+.................... 						{ 
+.................... 							alarmHour--; 
+03CF:  DECF   2E,F
+.................... 						} 
+.................... 						break; 
+03D0:  GOTO   3D8
+.................... 					} 
+.................... 					case 1: 
+.................... 					{ 
+.................... 						// MINUTE 
+.................... 						if(alarmMin == 0) 
+03D1:  MOVF   2D,F
+03D2:  BTFSS  03.2
+03D3:  GOTO   3D7
+.................... 						{ 
+.................... 							alarmMin = 59; 
+03D4:  MOVLW  3B
+03D5:  MOVWF  2D
+.................... 						} 
+03D6:  GOTO   3D8
+.................... 						else 
+.................... 						{ 
+.................... 							alarmMin--; 
+03D7:  DECF   2D,F
+.................... 						} 
+.................... 						break; 
+.................... 					} 
+.................... 				} 
+.................... 				printAlarm(); 
+03D8:  CALL   25A
+.................... 			} 
+.................... 			delay_ms(100); 
+03D9:  MOVLW  64
+03DA:  MOVWF  39
+03DB:  CALL   275
+.................... 			while(input(pin_D4)); 
+03DC:  BSF    03.5
+03DD:  BSF    08.4
+03DE:  BCF    03.5
+03DF:  BTFSC  08.4
+03E0:  GOTO   3DC
+.................... 		} 
+.................... 		checkAlarm(); 
+03E1:  GOTO   289
+.................... 		delay_ms(50); 
+03E2:  MOVLW  32
+03E3:  MOVWF  39
+03E4:  CALL   275
+03E5:  GOTO   2D1
+.................... 	} 
 .................... } 
-01F6:  SLEEP
+03E6:  SLEEP
 
 Configuration Fuses:
    Word  1: 3F32   HS NOWDT PUT NOBROWNOUT NOLVP NOCPD NOWRT NODEBUG NOPROTECT
